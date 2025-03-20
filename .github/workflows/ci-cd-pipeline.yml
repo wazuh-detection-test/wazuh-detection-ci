@@ -14,10 +14,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Set up Docker environment
-    - name: Set up Docker
-      run: sudo apt-get install -y docker.io
-
     # Build the Docker image
     - name: Build Docker Image
       run: docker build -t wazuh-test .
