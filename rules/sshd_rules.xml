@@ -1,0 +1,6 @@
+<rule id="5763" level="10">
+    <decoded_as>syslog</decoded_as>
+    <field name="program">sshd</field>
+    <description>SSH brute force attack detected</description>
+    <group>authentication_failed,</group>
+</rule>
