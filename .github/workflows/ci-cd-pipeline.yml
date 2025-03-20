@@ -1,0 +1,31 @@
+name: CI/CD Pipeline for Wazuh Detection Testing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Set up Docker environment
+    - name: Set up Docker
+      run: sudo apt-get install -y docker.io
+
+    # Build the Docker image
+    - name: Build Docker Image
+      run: docker build -t wazuh-test .
+
+    # Run the test script
+    - name: Run Detection Tests
+      run: docker run --rm wazuh-test ./scripts/run_tests.sh
+
+    # Deploy to the Wazuh server
+    - name: Deploy Detection Rules
+      run: ./scripts/deploy_to_wazuh.sh
